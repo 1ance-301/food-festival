@@ -1,7 +1,6 @@
 const APP_PREFIX = 'FoodEvent-';
 const VERSION = 'version_01';
-const CACHE_NAME = APP_PREFIX + VERSION;
-
+const CACHE_NAME = APP_PREFIX + VERSION
 const FILES_TO_CACHE = [
     "./index.html",
     "./events.html",
@@ -45,18 +44,15 @@ self.addEventListener('activate', function (e) {
         caches.keys().then(function (keyList) {
             let cacheKeeplist = keyList.filter(function (key) {
                 return key.indexOf(APP_PREFIX);
-            });
+            })
             cacheKeeplist.push(CACHE_NAME);
 
-            return Promise.all(
-                keyList.map(function (key, i) {
-                    if (cacheKeeplist.indexOf(key) === -1) {
-                        console.log('deleting cache : ' + keyList[i]);
-                        return caches.delete(keyList[i]);
-                    }
-                })
-            );
+            return Promise.all(keyList.map(function (key, i) {
+                if (cacheKeeplist.indexOf(key) === -1) {
+                    console.log('deleting cache : ' + keyList[i]);
+                    return caches.delete(keyList[i]);
+                }
+            }));
         })
     );
 });
-
